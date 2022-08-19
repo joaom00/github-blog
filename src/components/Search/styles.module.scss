@@ -1,3 +1,12 @@
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -6,7 +15,14 @@
   margin-block-end: 12px;
 
   h3 {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-size: 18px;
+
+    svg {
+      animation: spin 600ms linear infinite;
+    }
   }
 
   span {

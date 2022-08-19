@@ -21,24 +21,38 @@ interface HomeProps {
   user: User
 }
 
+interface PostsQuery {
+  items: Array<{
+    title: string
+    number: number
+    created_at: string
+    body: string
+  }>
+  total_count: number
+}
+
 const Home = ({ user }: HomeProps) => {
   const [search, setSearch] = React.useState('')
   const debouncedSearch = useDebounce(search)
 
   async function fetchPosts(query: string) {
     const { data } = await axios.get(`https://api.github.com/search/issues`, {
-      params: { q: `repo:github-blog ${query}` }
+      params: { q: `repo:joaom00/github-blog ${query}` }
     })
     return data
   }
 
-  const { data, isLoading } = useQuery(['post', debouncedSearch], () => fetchPosts(debouncedSearch))
+  const { data, isLoading } = useQuery<PostsQuery>(
+    ['post', debouncedSearch],
+    () => fetchPosts(debouncedSearch),
+    { retry: 0, refetchOnWindowFocus: false, refetchOnReconnect: false, staleTime: 1000 * 60 * 60 }
+  )
 
   return (
     <Layout>
       <UserCard user={user} />
-      <Search onChange={setSearch} isLoading={isLoading} />
-      <Posts />
+      <Search onChange={setSearch} isLoading={isLoading} postsCount={data?.items.length} />
+      <Posts posts={data?.items} />
     </Layout>
   )
 }

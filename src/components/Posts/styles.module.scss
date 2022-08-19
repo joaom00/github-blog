@@ -1,7 +1,8 @@
 .container {
+  --minWidth: 416px;
   margin-block-start: 48px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--minWidth)), 1fr));
   gap: 32px;
   padding-block-end: 234px;
 }
@@ -21,6 +22,16 @@
     h3 {
       max-inline-size: 283px;
       font-size: 20px;
+    }
+
+    span {
+      font-size: 14px;
+      text-align: right;
+      color: var(--span);
+
+      &::first-letter {
+        text-transform: uppercase;
+      }
     }
   }
 

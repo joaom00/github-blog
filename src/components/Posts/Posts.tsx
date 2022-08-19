@@ -1,23 +1,40 @@
+import Link from 'next/link'
+import { formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
+import removeMD from 'remove-markdown'
+
 import styles from './styles.module.scss'
 
-export const Posts = () => {
+interface PostsProps {
+  posts?: Array<{
+    title: string
+    number: number
+    created_at: string
+    body: string
+  }>
+}
+
+export const Posts = ({ posts }: PostsProps) => {
   return (
     <div className={styles.container}>
-      <article className={styles.post}>
-        <header>
-          <h3>JavaScript data types and data structures</h3>
-          <span>Há 1 dia</span>
-        </header>
-        <p>
-          Programming languages all have built-in data structures, but these often differ from one
-          language to another. This article attempts to list the built-in data structures available
-          in JavaScript and what properties they have. These can be used to build other data
-          structures. Wherever possible, comparisons with other languages are drawn. Dynamic typing
-          JavaScript is a loosely typed and dynamic language. Variables in JavaScript are not
-          directly associated with any particular value type, and any variable can be assigned (and
-          re-assigned) values of all types
-        </p>
-      </article>
+      {posts?.map((post) => (
+        <Link key={post.number} href={`/posts/${post.number}`}>
+          <a>
+            <article className={styles.post}>
+              <header>
+                <h3>{post.title}</h3>
+                <span>
+                  {formatDistanceToNow(new Date(post.created_at), {
+                    addSuffix: true,
+                    locale: ptBR
+                  })}
+                </span>
+              </header>
+              <p>{removeMD(post.body)}</p>
+            </article>
+          </a>
+        </Link>
+      ))}
     </div>
   )
 }

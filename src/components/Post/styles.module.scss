@@ -1,0 +1,13 @@
+.container {
+  padding-block: 40px;
+  max-inline-size: 75ch;
+  inline-size: 100%;
+  margin-inline: auto;
+  white-space: pre-wrap;
+  line-height: 1.6;
+  hyphens: auto;
+
+  ul {
+    list-style-position: inside;
+  }
+}

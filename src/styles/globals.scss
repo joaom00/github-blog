@@ -82,9 +82,33 @@
   block-size: auto;
 }
 
+:where(a) {
+  color: inherit;
+  text-decoration: none;
+}
+
 :where(.layout) {
   max-inline-size: 904px;
   padding-inline: 20px;
   inline-size: 100%;
   margin-inline: auto;
+}
+
+:where(.anchor) {
+  position: absolute;
+  visibility: hidden;
+  margin-inline-start: -1em;
+  padding-inline-end: 0.5em;
+  inline-size: 80%;
+  max-inline-size: 700px;
+  cursor: pointer;
+
+  &:after {
+    color: red;
+    content: '#';
+  }
+
+  &:hover {
+    visibility: visible;
+  }
 }
