@@ -1,0 +1,95 @@
+.container {
+  border-radius: 10px;
+  background-color: var(--baseProfile);
+  box-shadow: 0px 2px 28px rgba(0, 0, 0, 0.2);
+  margin-block-start: -85px;
+  padding-block: 32px;
+  padding-inline-start: 40px;
+  padding-inline-end: 32px;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  gap: 32px;
+
+  h2 {
+    margin-block-end: 8px;
+  }
+
+  @media (min-width: 640px) {
+    grid-template-columns: 148px 1fr;
+    place-items: initial;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+
+  p {
+    flex: 1;
+  }
+
+  header {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--brand);
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    @media (min-width: 640px) {
+      flex-direction: row;
+    }
+  }
+}
+
+.avatar {
+  border-radius: 8px;
+  block-size: 148px;
+  inline-size: 148px;
+}
+
+.iconsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+
+  margin-block-start: 24px;
+
+  @media (min-width: 640px) {
+    justify-content: start;
+    margin-block-start: 0;
+  }
+}
+
+.iconContainer {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: var(--baseSubtitle);
+
+  svg {
+    color: var(--baseLabel);
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 640px) {
+    flex-grow: 0;
+    justify-content: start;
+  }
+}

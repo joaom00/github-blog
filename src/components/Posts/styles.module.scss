@@ -1,0 +1,34 @@
+.container {
+  margin-block-start: 48px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  padding-block-end: 234px;
+}
+
+.post {
+  border-radius: 10px;
+  background-color: var(--secondaryShape);
+  padding-block: 32px;
+  padding-inline: 32px;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-block-end: 20px;
+
+    h3 {
+      max-inline-size: 283px;
+      font-size: 20px;
+    }
+  }
+
+  p {
+    line-height: 26px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+  }
+}
