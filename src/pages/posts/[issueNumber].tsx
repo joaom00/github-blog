@@ -7,6 +7,7 @@ import { Post } from '../../components/Post'
 import { PostHeader } from '../../components/PostHeader'
 import type { MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { mdxToHtml } from '../../lib/mdx'
+import { Comments } from '../../components/Comments'
 
 interface PostProps {
   post: {
@@ -32,6 +33,8 @@ export default function IssueNumberPage({ post }: PostProps) {
       />
 
       <Post body={post.body} />
+
+      <Comments />
     </Layout>
   )
 }
