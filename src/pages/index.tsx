@@ -6,6 +6,7 @@ import { Posts } from '../components/Posts'
 import { Search } from '../components/Search'
 import { UserCard } from '../components/UserCard'
 import useDebounce from '../hooks/useDebounce'
+import Head from 'next/head'
 
 export interface User {
   name: string
@@ -49,11 +50,16 @@ const Home = ({ user }: HomeProps) => {
   )
 
   return (
-    <Layout>
-      <UserCard user={user} />
-      <Search onChange={setSearch} isLoading={isLoading} postsCount={data?.items.length} />
-      <Posts posts={data?.items} />
-    </Layout>
+    <>
+      <Head>
+        <title>GitHub Blog</title>
+      </Head>
+      <Layout>
+        <UserCard user={user} />
+        <Search onChange={setSearch} isLoading={isLoading} postsCount={data?.items.length} />
+        <Posts posts={data?.items} />
+      </Layout>
+    </>
   )
 }
 

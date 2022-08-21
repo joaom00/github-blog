@@ -8,6 +8,7 @@ import { PostHeader } from '../../components/PostHeader'
 import type { MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { mdxToHtml } from '../../lib/mdx'
 import { Comments } from '../../components/Comments'
+import Head from 'next/head'
 
 export interface CommentProp {
   id: number
@@ -45,19 +46,25 @@ interface PostProps {
 
 export default function IssueNumberPage({ post }: PostProps) {
   return (
-    <Layout>
-      <PostHeader
-        title={post.title}
-        commentsCount={post.numberOfComments}
-        author={post.author}
-        date={post.created_at}
-        url={post.url}
-      />
+    <>
+      <Head>
+        <title>GitHub Blog | {post.title}</title>
+      </Head>
 
-      <Post body={post.body} />
+      <Layout>
+        <PostHeader
+          title={post.title}
+          commentsCount={post.numberOfComments}
+          author={post.author}
+          date={post.created_at}
+          url={post.url}
+        />
 
-      <Comments comments={post.comments} />
-    </Layout>
+        <Post body={post.body} />
+
+        <Comments comments={post.comments} />
+      </Layout>
+    </>
   )
 }
 
