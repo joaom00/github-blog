@@ -1,5 +1,4 @@
 import React from 'react'
-import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { Layout } from '../components/Layout'
 import { Posts } from '../components/Posts'
@@ -7,6 +6,7 @@ import { Search } from '../components/Search'
 import { UserCard } from '../components/UserCard'
 import useDebounce from '../hooks/useDebounce'
 import Head from 'next/head'
+import { useSearchQuery } from '../hooks/useSearchQuery'
 
 export interface User {
   name: string
@@ -22,32 +22,10 @@ interface HomeProps {
   user: User
 }
 
-interface PostsQuery {
-  items: Array<{
-    title: string
-    number: number
-    created_at: string
-    body: string
-  }>
-  total_count: number
-}
-
 const Home = ({ user }: HomeProps) => {
   const [search, setSearch] = React.useState('')
   const debouncedSearch = useDebounce(search)
-
-  async function fetchPosts(query: string) {
-    const { data } = await axios.get(`https://api.github.com/search/issues`, {
-      params: { q: `repo:joaom00/github-blog ${query}` }
-    })
-    return data
-  }
-
-  const { data, isLoading } = useQuery<PostsQuery>(
-    ['post', debouncedSearch],
-    () => fetchPosts(debouncedSearch),
-    { retry: 0, refetchOnWindowFocus: false, refetchOnReconnect: false, staleTime: 1000 * 60 * 60 }
-  )
+  const { data, isLoading } = useSearchQuery(debouncedSearch)
 
   return (
     <>
